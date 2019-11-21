@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:formvalidator/src/bloc/provider.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key key}) : super(key: key);
@@ -10,13 +11,16 @@ class LoginPage extends StatelessWidget {
         children: <Widget>[
           _crearFondo(context),
           _loginForm(context),
-          
         ],
       ),
     );
   }
 
   Widget _loginForm(BuildContext context) {
+//Llamar al privider
+    final bloc = Provider.of(context);
+//Ya siene acceso a todas las propiedades del bloc
+
     //OBTENER EL 40% DE la pantalla
     final size = MediaQuery.of(context).size;
     //Hace scroll depende del tamaño de su hijo
@@ -46,36 +50,47 @@ class LoginPage extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Text(
-                  'INGRESO',
+                  'Ingreso',
                   style: TextStyle(fontSize: 20.0),
                 ),
                 SizedBox(height: 20.0),
-                _crearEmail(),
+                _crearEmail(bloc),
                 SizedBox(height: 30.0),
-                _crearPass(),
+                _crearPass(bloc),
                 SizedBox(height: 30.0),
                 _creatBotn(),
               ],
             ),
           ),
           Text('¿Olvido la contreaseña?'),
-          SizedBox(height: 100.0,)
+          SizedBox(
+            height: 100.0,
+          )
         ],
       ),
     );
   }
 
-  Widget _crearEmail() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
-      child: TextField(
-        keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(
-            icon: Icon(Icons.alternate_email, color: Colors.cyan),
-            hintText: 'ejemplo@mail.com',
-            labelText: 'Correo Electronico'),
-      ),
+  Widget _crearEmail(LoginBloc bloc) {
+    return StreamBuilder(
+      stream: bloc.emailStream,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          child: TextField(
+            keyboardType: TextInputType.emailAddress,
+            decoration: InputDecoration(
+                icon: Icon(Icons.alternate_email, color: Colors.cyan),
+                hintText: 'ejemplo@mail.com',
+                labelText: 'Correo Electronico',
+                counterText: snapshot.data),
+            onChanged: (value) => bloc.changeEmail(value),
+          ),
+        );
+      },
     );
+
+    //despues de hacer uso del StreamBuider
   }
 
   Widget _creatBotn() {
@@ -86,13 +101,13 @@ class LoginPage extends StatelessWidget {
       ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
       elevation: 0.0,
-      color:  Color.fromRGBO(0, 103, 185, 1.0),
+      color: Color.fromRGBO(0, 103, 185, 1.0),
       textColor: Colors.white,
       onPressed: () {},
     );
   }
 
-  Widget _crearPass() {
+  Widget _crearPass(LoginBloc bloc) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: TextField(

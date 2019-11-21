@@ -1,6 +1,7 @@
 import 'dart:async';
 
-class LoginBlov {
+class LoginBloc {
+  //Singleton
   //controladores
   final _emailController = StreamController<String>.broadcast();
   final _passController = StreamController<String>.broadcast();
