@@ -11,7 +11,7 @@ class LoginBloc with Validators {
   final _passController = StreamController<String>.broadcast();
 
 //Recuperar los datos del Stream
-  Stream<String> get emailStream => _emailController.stream;
+  Stream<String> get emailStream => _emailController.stream.transform( validarEmail );
   Stream<String> get passwordSream => _passController.stream.transform( validarPassword );
 
   //Constructor
