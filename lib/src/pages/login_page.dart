@@ -108,15 +108,21 @@ class LoginPage extends StatelessWidget {
   }
 
   Widget _crearPass(LoginBloc bloc) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
-      child: TextField(
-        obscureText: true,
-        keyboardType: TextInputType.visiblePassword,
-        decoration: InputDecoration(
-            icon: Icon(Icons.vpn_key, color: Colors.cyan),
-            labelText: 'Password'),
-      ),
+    return StreamBuilder(
+      stream: bloc.passwordSream,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          child: TextField(
+            obscureText: true,
+            decoration: InputDecoration(
+                icon: Icon(Icons.vpn_key, color: Colors.cyan),
+                labelText: 'Password',
+                counterText: snapshot.data),
+            onChanged: bloc.changePassword,
+          ),
+        );
+      },
     );
   }
 
