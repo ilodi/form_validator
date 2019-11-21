@@ -105,7 +105,7 @@ class LoginPage extends StatelessWidget {
       elevation: 0.0,
       color: Color.fromRGBO(0, 103, 185, 1.0),
       textColor: Colors.white,
-      onPressed: () {},
+      onPressed: null,
     );
   }
 
