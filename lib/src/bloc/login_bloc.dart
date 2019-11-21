@@ -1,6 +1,10 @@
 import 'dart:async';
 
-class LoginBloc {
+import 'package:formvalidator/src/bloc/validart.dart';
+
+
+//AL agregar e whith se hace un mixing para mesclar
+class LoginBloc with Validators {
   //Singleton
   //controladores
   final _emailController = StreamController<String>.broadcast();
@@ -8,7 +12,7 @@ class LoginBloc {
 
 //Recuperar los datos del Stream
   Stream<String> get emailStream => _emailController.stream;
-  Stream<String> get passwordSream => _passController.stream;
+  Stream<String> get passwordSream => _passController.stream.transform( validarPassword );
 
   //Constructor
   //Insertar Valores al Stream
