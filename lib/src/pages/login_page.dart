@@ -58,7 +58,7 @@ class LoginPage extends StatelessWidget {
                 SizedBox(height: 30.0),
                 _crearPass(bloc),
                 SizedBox(height: 30.0),
-                _creatBotn(),
+                _creatBotn(bloc),
               ],
             ),
           ),
@@ -84,8 +84,7 @@ class LoginPage extends StatelessWidget {
                 hintText: 'ejemplo@mail.com',
                 labelText: 'Correo Electronico',
                 counterText: snapshot.data,
-               errorText: snapshot.error
-                ),
+                errorText: snapshot.error),
             onChanged: (value) => bloc.changeEmail(value),
           ),
         );
@@ -95,17 +94,23 @@ class LoginPage extends StatelessWidget {
     //despues de hacer uso del StreamBuider
   }
 
-  Widget _creatBotn() {
-    return RaisedButton(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 20.0),
-        child: Text('Ingresar'),
-      ),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-      elevation: 0.0,
-      color: Color.fromRGBO(0, 103, 185, 1.0),
-      textColor: Colors.white,
-      onPressed: null,
+  Widget _creatBotn(LoginBloc bloc) {
+    return StreamBuilder(
+      stream: bloc.formValidStream,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return RaisedButton(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 20.0),
+            child: Text('Ingresar'),
+          ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          elevation: 0.0,
+          color: Color.fromRGBO(0, 103, 185, 1.0),
+          textColor: Colors.white,
+          onPressed: snapshot.hasData ? () {} : null,
+        );
+      },
     );
   }
 
