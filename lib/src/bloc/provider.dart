@@ -5,10 +5,27 @@ export 'package:formvalidator/src/bloc/login_bloc.dart';
 
 //Se extiende de InheritedWidget
 class Provider extends InheritedWidget {
+
+
+static Provider _instancia;
+
+//factory determina si se debe de hacer algo o no
+factory Provider({Key key, Widget child}){
+  if(_instancia == null){
+    _instancia = new Provider._internal(key: key, child: child,);
+
+  }
+
+  return _instancia;
+}
+
+Provider._internal({Key key, Widget child}) : super(key: key, child: child);
+
   final loginBloc = LoginBloc();
 
-//COnstructor el super es para incializar InheritedWidget
-  Provider({Key key, Widget child}) : super(key: key, child: child);
+
+//Constructor el super es para incializar InheritedWidget
+  //Provider({Key key, Widget child}) : super(key: key, child: child);
 
 //Al actualizarce le debe debe de notificar a sus hijos??
   @override
