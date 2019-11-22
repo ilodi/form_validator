@@ -7,7 +7,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //Llamar al privider
-    final bloc = Provider.of(context);
+    //final bloc = Provider.of(context);
 
     return Scaffold(
       appBar: AppBar(

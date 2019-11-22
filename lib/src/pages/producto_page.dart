@@ -80,6 +80,6 @@ class _ProductoPageState extends State<ProductoPage> {
   void _sumbit() {
     //Estado actual del formulario
     //Si es valido es un true
-    formKey.currentState.validate();
+    if( !formKey.currentState.validate()) return;
   }
 }
