@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:formvalidator/src/models/producto_model.dart';
 import 'package:formvalidator/src/utils/utils.dart' as utils;
 
 class ProductoPage extends StatefulWidget {
@@ -8,6 +9,8 @@ class ProductoPage extends StatefulWidget {
 
 class _ProductoPageState extends State<ProductoPage> {
   final formKey = GlobalKey<FormState>();
+
+  ProductoModel producto = new ProductoModel();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,7 @@ class _ProductoPageState extends State<ProductoPage> {
           child: Form(
             key: formKey,
             child: Column(
-              children: <Widget>[_crearNombre(), _crearPrecio(), _crearBtn()],
+              children: <Widget>[_crearNombre(), _crearPrecio(),_crearDisponible(), _crearBtn()],
             ),
           ),
         ),
@@ -41,8 +44,10 @@ class _ProductoPageState extends State<ProductoPage> {
 
   Widget _crearNombre() {
     return TextFormField(
+      initialValue: producto.titulo,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(labelText: 'Producto'),
+      onSaved: (value) => producto.titulo = value,
       validator: (value) {
         if (value.length < 3) {
           return 'Ingresa un nombre mejor';
@@ -54,8 +59,10 @@ class _ProductoPageState extends State<ProductoPage> {
 
   Widget _crearPrecio() {
     return TextFormField(
+      initialValue: producto.valor.toString(),
       keyboardType: TextInputType.numberWithOptions(decimal: true),
       decoration: InputDecoration(labelText: 'Precio'),
+      onSaved: (value) => producto.valor = double.parse(value),
       validator: (value) {
         if (utils.isNumeric(value)) {
           return null;
@@ -65,6 +72,19 @@ class _ProductoPageState extends State<ProductoPage> {
       },
     );
   }
+
+Widget _crearDisponible(){
+  return SwitchListTile(
+value: producto.disponible,
+title: Text('Disponible'),
+onChanged: (value){
+  setState(() {
+    producto.disponible = value;
+  });
+},
+  );
+
+}
 
   Widget _crearBtn() {
     return RaisedButton.icon(
@@ -80,6 +100,10 @@ class _ProductoPageState extends State<ProductoPage> {
   void _sumbit() {
     //Estado actual del formulario
     //Si es valido es un true
-    if( !formKey.currentState.validate()) return;
+    if (!formKey.currentState.validate()) return;
+
+    formKey.currentState.save();
+
+    print(producto.valor);
   }
 }
