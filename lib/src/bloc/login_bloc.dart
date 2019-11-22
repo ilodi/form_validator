@@ -5,6 +5,7 @@ import 'package:formvalidator/src/bloc/validart.dart';
 //AL agregar e whith se hace un mixing para mesclar
 class LoginBloc with Validators {
   //Singleton
+
   //controladores
   final _emailController = BehaviorSubject<String>();
   final _passController = BehaviorSubject<String>();
@@ -17,7 +18,7 @@ class LoginBloc with Validators {
   //Validr que ambos tengan datos
 //RXDArt
 //Se necesita hacer uso de los combine existen hasta 7
-//ES un obserbable que
+//Es un obserbable que
   Stream<bool> get formValidStream =>
       Observable.combineLatest2(emailStream, passwordSream, (e, p) => true);
 
@@ -26,6 +27,10 @@ class LoginBloc with Validators {
 
   Function(String) get changeEmail => _emailController.sink.add;
   Function(String) get changePassword => _passController.sink.add;
+
+//Obtener ultimo valor ingresado
+  String get email => _emailController.value;
+  String get password => _passController.value;
 
   //Cerrar cuando no se necesitan
   dispose() {

@@ -108,10 +108,19 @@ class LoginPage extends StatelessWidget {
           elevation: 0.0,
           color: Color.fromRGBO(0, 103, 185, 1.0),
           textColor: Colors.white,
-          onPressed: snapshot.hasData ? () {} : null,
+          onPressed: snapshot.hasData ? () => _login(context, bloc) : null,
         );
       },
     );
+  }
+
+  _login(BuildContext context, LoginBloc bloc) {
+    print('=======');
+    print('email ${bloc.email}');
+    print('password ${bloc.password}');
+    print('=======');
+
+    Navigator.pushNamed(context, 'home');
   }
 
   Widget _crearPass(LoginBloc bloc) {

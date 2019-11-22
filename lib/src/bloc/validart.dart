@@ -7,7 +7,7 @@ class Validators {
   final validarEmail = StreamTransformer<String, String>.fromHandlers(
       //SInk dice que esta fluyendo
       handleData: (email, sink) {
-    //SE evalua frente una exprecion regular
+    //Se evalua frente una exprecion regular
     Pattern pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
