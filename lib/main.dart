@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         'producto' : (BuildContext context) => ProductoPage(),
       },
       theme: ThemeData(
-        primaryColor:  Color.fromRGBO(0, 103, 185, 1.0),
+        primaryColor: Colors.deepPurple,
       ),
     ));
   }

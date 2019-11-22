@@ -21,6 +21,7 @@ class HomePage extends StatelessWidget {
   Widget _crearBtn(BuildContext context) {
     return FloatingActionButton(
         child: Icon(Icons.add),
+        backgroundColor: Colors.deepPurple,
         onPressed: () => Navigator.pushNamed(context, 'producto'));
   }
 }
