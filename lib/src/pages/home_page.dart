@@ -22,6 +22,7 @@ class HomePage extends StatelessWidget {
     return FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: Colors.deepPurple,
+        elevation: 0.0,
         onPressed: () => Navigator.pushNamed(context, 'producto'));
   }
 }
