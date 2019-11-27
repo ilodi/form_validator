@@ -77,6 +77,7 @@ Widget _crearDisponible(){
   return SwitchListTile(
 value: producto.disponible,
 title: Text('Disponible'),
+activeColor: Colors.deepPurple,
 onChanged: (value){
   setState(() {
     producto.disponible = value;
