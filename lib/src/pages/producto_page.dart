@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:formvalidator/src/models/producto_model.dart';
+import 'package:formvalidator/src/providers/productos_provider.dart';
 import 'package:formvalidator/src/utils/utils.dart' as utils;
 
 class ProductoPage extends StatefulWidget {
@@ -11,6 +12,8 @@ class _ProductoPageState extends State<ProductoPage> {
   final formKey = GlobalKey<FormState>();
 
   ProductoModel producto = new ProductoModel();
+//para poderla usar en otras clases
+  final productoProvider = new ProductosProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +37,12 @@ class _ProductoPageState extends State<ProductoPage> {
           child: Form(
             key: formKey,
             child: Column(
-              children: <Widget>[_crearNombre(), _crearPrecio(),_crearDisponible(), _crearBtn()],
+              children: <Widget>[
+                _crearNombre(),
+                _crearPrecio(),
+                _crearDisponible(),
+                _crearBtn()
+              ],
             ),
           ),
         ),
@@ -73,19 +81,18 @@ class _ProductoPageState extends State<ProductoPage> {
     );
   }
 
-Widget _crearDisponible(){
-  return SwitchListTile(
-value: producto.disponible,
-title: Text('Disponible'),
-activeColor: Colors.deepPurple,
-onChanged: (value){
-  setState(() {
-    producto.disponible = value;
-  });
-},
-  );
-
-}
+  Widget _crearDisponible() {
+    return SwitchListTile(
+      value: producto.disponible,
+      title: Text('Disponible'),
+      activeColor: Colors.deepPurple,
+      onChanged: (value) {
+        setState(() {
+          producto.disponible = value;
+        });
+      },
+    );
+  }
 
   Widget _crearBtn() {
     return RaisedButton.icon(
@@ -105,6 +112,11 @@ onChanged: (value){
 
     formKey.currentState.save();
 
+    print(producto.titulo);
     print(producto.valor);
+    print(producto.disponible);
+
+
+    productoProvider.crearProducto(producto);
   }
 }
