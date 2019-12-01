@@ -54,11 +54,11 @@ class HomePage extends StatelessWidget {
       child: ListTile(
         title: Text('${producto.titulo} -  ${producto.valor}'),
         subtitle: Text(producto.id),
-        onTap: () => Navigator.pushNamed(context, 'producto'),
+        onTap: () => Navigator.pushNamed(context, 'producto', arguments: producto),
       ),
     );
   }
-git config --global user.email "lodi.dev@outlook.com"
+
   Widget _crearBtn(BuildContext context) {
     return FloatingActionButton(
         child: Icon(Icons.add),

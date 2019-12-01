@@ -18,6 +18,18 @@ class ProductosProvider {
     return true;
   }
 
+  //Editar producto
+
+  Future<bool> editarProducto(ProductoModel producto) async {
+    final url = '$_url/productos/${producto.id}.json';
+//el put remplaza no crea uno nuevo
+    final resp = await http.put(url, body: productoModelToJson(producto));
+    final decodedData = json.decode(resp.body);
+    print(decodedData);
+    return true;
+  }
+
+//
   Future<List<ProductoModel>> cargarProductos() async {
     final url = '$_url/productos.json';
 //pet get
