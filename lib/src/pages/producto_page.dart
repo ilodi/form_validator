@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:formvalidator/src/models/producto_model.dart';
 import 'package:formvalidator/src/providers/productos_provider.dart';
 import 'package:formvalidator/src/utils/utils.dart' as utils;
@@ -17,6 +19,7 @@ class _ProductoPageState extends State<ProductoPage> {
   final productoProvider = new ProductosProvider();
 
   bool _guardando = false;
+  File foto;
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +37,11 @@ class _ProductoPageState extends State<ProductoPage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.photo_size_select_actual),
-            onPressed: () {},
+            onPressed: _seleccionarFoto,
           ),
           IconButton(
             icon: Icon(Icons.camera_alt),
-            onPressed: () {},
+            onPressed: _tomarFoto,
           )
         ],
       ),
@@ -49,6 +52,7 @@ class _ProductoPageState extends State<ProductoPage> {
             key: formKey,
             child: Column(
               children: <Widget>[
+                _mostrarFoto(),
                 _crearNombre(),
                 _crearPrecio(),
                 _crearDisponible(),
@@ -131,9 +135,6 @@ class _ProductoPageState extends State<ProductoPage> {
     } else {
       productoProvider.editarProducto(producto);
     }
-
-
-
     mostrartSnackbar('Registro listo');
     Navigator.pop(context);
   }
@@ -145,4 +146,29 @@ class _ProductoPageState extends State<ProductoPage> {
     );
     scaffolKey.currentState.showSnackBar(snackbar);
   }
+
+  Widget _mostrarFoto() {
+    if (producto.fotoUrl != null) {
+      //TODO: tengo que hacer esto
+      return Container();
+    } else {
+      return Image(
+        image: AssetImage(foto?.path ?? 'assets/no-image.png'),
+        height: 300.0,
+        fit: BoxFit.cover,
+      );
+    }
+  }
+
+  _seleccionarFoto() async {
+    //Hasta que el usurio responda
+    foto = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    if (foto != null) {
+      //limpiar archivos
+    }
+    setState(() {});
+  }
+
+  _tomarFoto() {}
 }
