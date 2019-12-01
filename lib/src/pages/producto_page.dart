@@ -11,11 +11,12 @@ class ProductoPage extends StatefulWidget {
 class _ProductoPageState extends State<ProductoPage> {
   final formKey = GlobalKey<FormState>();
   //
-   final scaffolKey = GlobalKey<ScaffoldState>();
-
+  final scaffolKey = GlobalKey<ScaffoldState>();
   ProductoModel producto = new ProductoModel();
 //para poderla usar en otras clases
   final productoProvider = new ProductosProvider();
+
+  bool _guardando = false;
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +112,7 @@ class _ProductoPageState extends State<ProductoPage> {
       color: Colors.deepPurple,
       textColor: Colors.white,
       icon: Icon(Icons.save_alt),
-      onPressed: _sumbit,
+      onPressed: (_guardando) ? null : _sumbit,
     );
   }
 
@@ -121,10 +122,9 @@ class _ProductoPageState extends State<ProductoPage> {
     if (!formKey.currentState.validate()) return;
 
     formKey.currentState.save();
-
-    print(producto.titulo);
-    print(producto.valor);
-    print(producto.disponible);
+    setState(() {
+      _guardando = true;
+    });
 
     if (producto.id == null) {
       productoProvider.crearProducto(producto);
@@ -132,7 +132,10 @@ class _ProductoPageState extends State<ProductoPage> {
       productoProvider.editarProducto(producto);
     }
 
+
+
     mostrartSnackbar('Registro listo');
+    Navigator.pop(context);
   }
 
   void mostrartSnackbar(String mensaje) {
