@@ -31,7 +31,6 @@ class ProductosProvider {
     if (decodedData == null) return [];
 
     decodedData.forEach((id, prod) {
-
       final prodTemp = ProductoModel.fromJson(prod);
       prodTemp.id = id;
 
@@ -39,5 +38,16 @@ class ProductosProvider {
     });
 
     return productos;
+  }
+
+  ///Productos para borrar
+
+  Future<int> borrarProducto(String id) async {
+    final url = '$_url/productos/$id.json';
+    final resp = await http.delete(url);
+
+    print(json.decode(resp.body));
+
+    return 1;
   }
 }

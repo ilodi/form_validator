@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       routes: {
         'login': (BuildContext context) => LoginPage(),
         'home': (BuildContext context) => HomePage(),
-        'producto' : (BuildContext context) => ProductoPage(),
+        'producto': (BuildContext context) => ProductoPage(),
       },
       theme: ThemeData(
         primaryColor: Colors.deepPurple,

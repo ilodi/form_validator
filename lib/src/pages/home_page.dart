@@ -48,6 +48,9 @@ class HomePage extends StatelessWidget {
       background: Container(
         color: Colors.red,
       ),
+      onDismissed: ( direccion ){
+       productosProvider.borrarProducto(producto.id);
+      },
       child: ListTile(
         title: Text('${producto.titulo} -  ${producto.valor}'),
         subtitle: Text(producto.id),
@@ -55,7 +58,7 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
-
+git config --global user.email "lodi.dev@outlook.com"
   Widget _crearBtn(BuildContext context) {
     return FloatingActionButton(
         child: Icon(Icons.add),
