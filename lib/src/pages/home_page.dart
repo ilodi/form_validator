@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget {
        productosProvider.borrarProducto(producto.id);
       },
       child: ListTile(
-        title: Text('${producto.titulo} -  ${producto.valor}'),
+        title: Text('${producto.titulo} -${producto.valor}'),
         subtitle: Text(producto.id),
         onTap: () => Navigator.pushNamed(context, 'producto', arguments: producto),
       ),
