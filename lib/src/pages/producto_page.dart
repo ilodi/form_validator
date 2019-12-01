@@ -10,6 +10,8 @@ class ProductoPage extends StatefulWidget {
 
 class _ProductoPageState extends State<ProductoPage> {
   final formKey = GlobalKey<FormState>();
+  //
+   final scaffolKey = GlobalKey<ScaffoldState>();
 
   ProductoModel producto = new ProductoModel();
 //para poderla usar en otras clases
@@ -25,6 +27,7 @@ class _ProductoPageState extends State<ProductoPage> {
     }
 
     return Scaffold(
+      key: scaffolKey,
       appBar: AppBar(
         title: Text('Producto interno'),
         actions: <Widget>[
@@ -128,5 +131,15 @@ class _ProductoPageState extends State<ProductoPage> {
     } else {
       productoProvider.editarProducto(producto);
     }
+
+    mostrartSnackbar('Registro listo');
+  }
+
+  void mostrartSnackbar(String mensaje) {
+    final snackbar = SnackBar(
+      content: Text(mensaje),
+      duration: Duration(milliseconds: 1500),
+    );
+    scaffolKey.currentState.showSnackBar(snackbar);
   }
 }
