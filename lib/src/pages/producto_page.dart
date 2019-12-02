@@ -119,7 +119,7 @@ class _ProductoPageState extends State<ProductoPage> {
     );
   }
 
-  void _sumbit() {
+  void _sumbit() async {
     //Estado actual del formulario
     //Si es valido es un true
     if (!formKey.currentState.validate()) return;
@@ -128,6 +128,10 @@ class _ProductoPageState extends State<ProductoPage> {
     setState(() {
       _guardando = true;
     });
+    
+    if (foto != null) {
+     producto.fotoUrl = await productoProvider.subirImagen(foto);
+    }
 
     if (producto.id == null) {
       productoProvider.crearProducto(producto);
