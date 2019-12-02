@@ -29,7 +29,6 @@ class _ProductoPageState extends State<ProductoPage> {
       //reiniciar el producto
       producto = proData;
     }
-
     return Scaffold(
       key: scaffolKey,
       appBar: AppBar(
@@ -161,14 +160,19 @@ class _ProductoPageState extends State<ProductoPage> {
   }
 
   _seleccionarFoto() async {
-    //Hasta que el usurio responda
-    foto = await ImagePicker.pickImage(source: ImageSource.gallery);
+    _procesarImagen(ImageSource.gallery);
+  }
+
+  _tomarFoto() async {
+    _procesarImagen(ImageSource.camera);
+  }
+
+  _procesarImagen(ImageSource origen) async {
+    foto = await ImagePicker.pickImage(source: origen);
 
     if (foto != null) {
       //limpiar archivos
     }
     setState(() {});
   }
-
-  _tomarFoto() {}
 }
