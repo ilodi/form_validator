@@ -13,7 +13,7 @@ class ProductoPage extends StatefulWidget {
 class _ProductoPageState extends State<ProductoPage> {
   final formKey = GlobalKey<FormState>();
   //
-  final scaffolKey = GlobalKey<ScaffoldState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   ProductoModel producto = new ProductoModel();
 //para poderla usar en otras clases
   final productoProvider = new ProductosProvider();
@@ -30,7 +30,7 @@ class _ProductoPageState extends State<ProductoPage> {
       producto = proData;
     }
     return Scaffold(
-      key: scaffolKey,
+      key: scaffoldKey,
       appBar: AppBar(
         title: Text('Producto interno'),
         actions: <Widget>[
@@ -122,15 +122,16 @@ class _ProductoPageState extends State<ProductoPage> {
   void _sumbit() async {
     //Estado actual del formulario
     //Si es valido es un true
-    if (!formKey.currentState.validate()) return;
+   
+    if ( !formKey.currentState.validate() ) return;
 
     formKey.currentState.save();
-    setState(() {
-      _guardando = true;
-    });
+
+    setState(() {_guardando = true; });
     
-    if (foto != null) {
-     producto.fotoUrl = await productoProvider.subirImagen(foto);
+  
+    if ( foto != null ) {
+      producto.fotoUrl = await productoProvider.subirImagen(foto);
     }
 
     if (producto.id == null) {
@@ -147,7 +148,8 @@ class _ProductoPageState extends State<ProductoPage> {
       content: Text(mensaje),
       duration: Duration(milliseconds: 1500),
     );
-    scaffolKey.currentState.showSnackBar(snackbar);
+    scaffoldKey.currentState.showSnackBar(snackbar);
+   
   }
 
   Widget _mostrarFoto() {
@@ -164,19 +166,23 @@ class _ProductoPageState extends State<ProductoPage> {
   }
 
   _seleccionarFoto() async {
-    _procesarImagen(ImageSource.gallery);
+   _procesarImagen( ImageSource.gallery );
   }
 
   _tomarFoto() async {
-    _procesarImagen(ImageSource.camera);
+     _procesarImagen( ImageSource.camera );
   }
 
   _procesarImagen(ImageSource origen) async {
-    foto = await ImagePicker.pickImage(source: origen);
 
-    if (foto != null) {
-      //limpiar archivos
+    foto = await ImagePicker.pickImage(
+      source: origen
+    );
+
+    if ( foto != null ) {
+      producto.fotoUrl = null;
     }
+
     setState(() {});
   }
 }

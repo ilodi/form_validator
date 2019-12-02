@@ -66,35 +66,38 @@ class ProductosProvider {
   }
 
   //
-  Future<String> subirImagen(File imagen) async {
-    final url = Uri.parse(
-        'https://api.cloudinary.com/v1_1/flutterlodi/image/upload?upload_preset=aovmajiw');
+ Future<String> subirImagen( File imagen ) async {
 
-//pain type detecta de que tipo es el archivo que se va a subir
-    final mainType = mime(imagen.path).split('/');
+    final url = Uri.parse('https://api.cloudinary.com/v1_1/dc0tufkzf/image/upload?upload_preset=cwye3brj');
+    final mimeType = mime(imagen.path).split('/'); //image/jpeg
 
-    final imageUploadRequest = http.MultipartRequest('POST', url);
+    final imageUploadRequest = http.MultipartRequest(
+      'POST',
+      url
+    );
 
-    print(mainType);
-    //preparar archivo
-//El frompath es para comentarle que es un archivo local
-    final file = await http.MultipartFile.fromPath('fiel', imagen.path,
-        contentType: MediaType(mainType[0], mainType[0]));
+    final file = await http.MultipartFile.fromPath(
+      'file', 
+      imagen.path,
+      contentType: MediaType( mimeType[0], mimeType[1] )
+    );
 
     imageUploadRequest.files.add(file);
 
-    final streamResponese = await imageUploadRequest.send();
 
-    final resp = await http.Response.fromStream(streamResponese);
+    final streamResponse = await imageUploadRequest.send();
+    final resp = await http.Response.fromStream(streamResponse);
 
-    if (resp.statusCode != 200 && resp.statusCode != 201) {
+    if ( resp.statusCode != 200 && resp.statusCode != 201 ) {
       print('Algo salio mal');
-      print(resp.body);
+      print( resp.body );
       return null;
     }
 
     final respData = json.decode(resp.body);
-    print(respData);
+    print( respData);
+
     return respData['secure_url'];
+
   }
 }
