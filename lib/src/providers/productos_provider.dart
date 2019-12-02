@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:formvalidator/src/models/producto_model.dart';
@@ -62,4 +63,15 @@ class ProductosProvider {
 
     return 1;
   }
+
+
+
+
+  //
+  Future<String> subirImagen(File imagen) async{
+    final url = Uri.parse('https://api.cloudinary.com/v1_1/flutterlodi/image/upload?upload_preset=aovmajiw');
+
+    
+  }
+
 }

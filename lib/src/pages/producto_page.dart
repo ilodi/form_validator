@@ -148,7 +148,7 @@ class _ProductoPageState extends State<ProductoPage> {
 
   Widget _mostrarFoto() {
     if (producto.fotoUrl != null) {
-      //TODO: tengo que hacer esto
+      // tengo que hacer esto
       return Container();
     } else {
       return Image(
