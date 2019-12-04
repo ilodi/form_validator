@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';import 'package:flutter/material.dart';
 import 'package:formvalidator/src/bloc/provider.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key key}) : super(key: key);
+class RegistroPage extends StatelessWidget {
+  const RegistroPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class LoginPage extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Text(
-                  'Ingreso',
+                  'Crear Cuenta',
                   style: TextStyle(fontSize: 20.0),
                 ),
                 SizedBox(height: 20.0),
@@ -63,8 +63,8 @@ class LoginPage extends StatelessWidget {
             ),
           ),
           FlatButton(
-            child: Text('Crear una nueva cuenta'),
-            onPressed: () => Navigator.pushReplacementNamed(context, 'registro'),
+            child: Text('¿Ya tienes cuenta?'),
+            onPressed: () => Navigator.pushReplacementNamed(context, 'login'),
           ),
           SizedBox(
             height: 100.0,
@@ -104,7 +104,7 @@ class LoginPage extends StatelessWidget {
         return RaisedButton(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 20.0),
-            child: Text('Ingresar'),
+            child: Text('Registrar'),
           ),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
@@ -154,8 +154,8 @@ class LoginPage extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
           gradient: LinearGradient(colors: <Color>[
-        Color.fromRGBO(0, 103, 185, 1.0),
-        Color.fromRGBO(0, 88, 161, 1.0),
+        Color.fromRGBO(142, 45, 226, 1.0),
+        Color.fromRGBO(74, 0, 224, 1.0),
       ])),
     );
 
@@ -201,7 +201,7 @@ class LoginPage extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Icon(
-                Icons.person_pin_circle,
+                Icons.verified_user,
                 color: Colors.white,
                 size: 100.0,
               ),
@@ -209,7 +209,7 @@ class LoginPage extends StatelessWidget {
                 height: 10.0,
                 width: double.infinity,
               ),
-              Text('David E. Lopez',
+              Text('Hola',
                   style: TextStyle(color: Colors.white, fontSize: 25.0)),
             ],
           ),
