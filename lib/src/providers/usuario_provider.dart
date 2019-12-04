@@ -21,5 +21,18 @@ class UsuarioProvider {
     Map<String, dynamic> decodedResp = json.decode(resp.body);
 
     print(decodedResp);
+
+    //Manejo de respuesta
+    if(decodedResp.containsKey('idToken')){
+     // TODO: Salvar el token en el storage del devices
+     //Si todo sale bien con la respuesta
+     //Retornara un mapa 
+     return {'ok': true, 'token': decodedResp['idToken']};
+    }else{
+      //Si hay un mens
+
+      //ES un mapa dentro de otro mapa
+       return {'ok': false, 'mensaje': decodedResp['error']['message']};
+    }
   }
 }
