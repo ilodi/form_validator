@@ -1,8 +1,12 @@
-import 'package:flutter/material.dart';import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:formvalidator/src/bloc/provider.dart';
+import 'package:formvalidator/src/providers/usuario_provider.dart';
 
 class RegistroPage extends StatelessWidget {
-  const RegistroPage({Key key}) : super(key: key);
+  //Instancia del usuario provider
+
+  final usuarioProvider = new UsuarioProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -111,19 +115,14 @@ class RegistroPage extends StatelessWidget {
           elevation: 0.0,
           color: Color.fromRGBO(0, 103, 185, 1.0),
           textColor: Colors.white,
-          onPressed: snapshot.hasData ? () => _login(context, bloc) : null,
+          onPressed: snapshot.hasData ? () => _register(context, bloc) : null,
         );
       },
     );
   }
 
-  _login(BuildContext context, LoginBloc bloc) {
-    print('=======');
-    print('email ${bloc.email}');
-    print('password ${bloc.password}');
-    print('=======');
-
-    Navigator.pushNamed(context, 'home');
+  _register(BuildContext context, LoginBloc bloc) {
+    usuarioProvider.nuevoUsuario(bloc.email, bloc.password);
   }
 
   Widget _crearPass(LoginBloc bloc) {
